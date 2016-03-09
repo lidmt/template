@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="kr.co.hanamicron.bwp.components.dao.MemberDao">
+  <select id="getMemberRolesByMemberNo" parameterType="int" resultType="Role">
+    select
+      role.no
+    , role.name
+    from bwp.member_role inner join bwp.role
+    where member_role.user_no = #{member_no}
+  </select>
+</mapper>
