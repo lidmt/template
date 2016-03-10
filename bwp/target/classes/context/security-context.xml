@@ -13,7 +13,8 @@
     <sec:intercept-url pattern="/images/**" access="permitAll"/>
     <sec:intercept-url pattern="/js/**" access="permitAll"/>
     <sec:intercept-url pattern="/css/**" access="permitAll"/>
-    <sec:form-login login-page="/member/singin" login-processing-url="/certification" username-parameter="id" password-parameter="password" default-target-url="/member/signin/success"/>
+    <sec:intercept-url pattern="/member/signup" access="permitAll"/>
+    <sec:form-login login-page="/member/signin" login-processing-url="/member/signin" username-parameter="id" password-parameter="password" default-target-url="/member/signin/success"/>
   </sec:http>
   
   <sec:authentication-manager alias="authenticationManager">

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper namespace="kr.co.hanamicron.bwp.components.dao.MemberDao">
+<mapper namespace="kr.co.hanamicron.bwp.component.dao.member.MemberDao">
   <select id="getMemberById" parameterType="String" resultType="Member">
     Member
       no
@@ -13,9 +13,9 @@
     from bwp.member where id = #{id}
   </select>
   
-  <insert id="insert" parameterType="Member">
+  <insert id="insertMember" parameterType="Member">
     <selectKey keyProperty="no" order="BEFORE">
-      select nextVal('member_no_seq')
+      select nextVal('bwp.member_no_seq')
     </selectKey>
     Insert into bwp.member (
       no
@@ -24,7 +24,6 @@
     , name
     , email
     , update_date
-    , status_no
     ) value (
       #{no}
     , #{id}
@@ -32,7 +31,6 @@
     , #{name}
     , #{email}
     , now()
-    , #{status.no}
     )
   </insert>
 </mapper>
