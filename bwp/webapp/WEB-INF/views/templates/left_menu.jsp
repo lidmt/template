@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!-- User menu -->
 <div class="sidebar-user">
@@ -35,19 +36,19 @@
       <li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
       <li><a href="index.html"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
       <!-- menu level 1 -->
-      <c:forEach var="level_1" items="${menu_list}">
+      <c:forEach var="level_1" items="${menu}">
         <li><a href="${level_1.url}"><i class="icon-grid"></i> <span>${level_1.name}</span></a>
           
           <!-- menu level 2 -->
-          <c:if test="${level_1.sub_menu != null or level_1.sub_menu.size != 0}">
+          <c:if test="${level_1.subMenu != null and fn:length(level_1.subMenu) != 0}">
             <ul>
-            <c:forEach var="level_2" items="${level_1.sub_menu}">
+            <c:forEach var="level_2" items="${level_1.subMenu}">
               <li><a href="${level_2.url}"><i class="icon-grid"></i> <span>${level_2.name}</span></a>
                 
                 <!-- menu level 3 -->
-                <c:if test="${level_2.sub_menu != null or level_2.sub_menu.size != 0}">
+                <c:if test="${level_2.subMenu != null and fn:length(level_2.subMenu) != 0}">
                   <ul>
-                    <c:forEach var="level_3" items="${level_2.sub_menu}">
+                    <c:forEach var="level_3" items="${level_2.subMenu}">
                       <li><a href="${level_3.url}"><i class="icon-grid"></i> <span>${level_3.name}</span></a>
                     </c:forEach>
                   </ul>

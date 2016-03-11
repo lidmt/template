@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="kr.co.hanamicron.bwp.component.dao.member.SignInHistoryDao">
+  <select id="getSignInHistoryByMemberNo" parameterType="int" resultType="signinhistory">
+    select
+      ip_address
+    , fail_count
+    , fail_date
+    , success_date
+    from bwp.signin_history
+    where member_no = #{member_no}
+  </select>
+  
+  <insert id="insertMemberRole" parameterType="signinhistory">
+    insert into bwp.signin_history (
+      member_no
+    , ip_address
+    , success_date
+    ) value (
+      #{memberNo}
+    , #{ipAddress}
+    , now()
+    )
+  </insert>
+  
+  <update id="updateSignInSuccessHistory" parameterType="member">
+    update bwp.signin_history set
+    ip_address = #{history.ipAddress}
+    fail_count = 0
+    success_date = now(),
+    where member_no = #{no}
+  </update>
+  
+  <update id="updateSignInFailHistory" parameterType="member">
+    update bwp.signin_history set
+    ip_address = #{history.ipAddress}
+    fail_count = fail_count+1
+    success_date = now(),
+    where member_no = #{no}
+  </update>
+</mapper>

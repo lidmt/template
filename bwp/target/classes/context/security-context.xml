@@ -8,18 +8,40 @@
   
   <bean id="customAuthenticationProvider" class="kr.co.hanamicron.bwp.core.security.CustomAuthenticationProvider"/>
   
-  <sec:http use-expressions="true">
+  <sec:http use-expressions="true" >
+    <sec:access-denied-handler ref="customAccessDeniedHander"/>
+    <sec:intercept-url pattern="/" access="permitAll"/>
+    <sec:intercept-url pattern="/favicon.ico" access="permitAll"/>
+    <sec:intercept-url pattern="/member/signin" access="permitAll"/>
+    <sec:intercept-url pattern="/member/signup" access="permitAll"/>
     <sec:intercept-url pattern="/resources/**" access="permitAll"/>
     <sec:intercept-url pattern="/images/**" access="permitAll"/>
     <sec:intercept-url pattern="/js/**" access="permitAll"/>
     <sec:intercept-url pattern="/css/**" access="permitAll"/>
-    <sec:intercept-url pattern="/member/signup" access="permitAll"/>
-    <sec:form-login login-page="/member/signin" login-processing-url="/member/signin" username-parameter="id" password-parameter="password" default-target-url="/member/signin/success"/>
+    <sec:intercept-url pattern="/**" access="!hasRole('ROLE_ANONYMOUS')"/>
+    
+    <sec:form-login
+      login-page="/member/signin"
+      login-processing-url="/member/signin"
+      username-parameter="id"
+      password-parameter="password"
+      authentication-success-handler-ref="signInSuccessHander"
+      authentication-failure-handler-ref="signInFailHander"
+      default-target-url="/member/signin/success"
+      always-use-default-target="false"
+    />
+    
+    <sec:csrf disabled="true"/>
   </sec:http>
+  
   
   <sec:authentication-manager alias="authenticationManager">
     <sec:authentication-provider ref="customAuthenticationProvider"/>
   </sec:authentication-manager>
   
   <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+  
+  <bean id="customAccessDeniedHander" class="kr.co.hanamicron.bwp.core.security.handler.CustomAccessDeniedHander"/>
+  <bean id="signInSuccessHander" class="kr.co.hanamicron.bwp.core.security.handler.SignInSuccessHander"/>
+  <bean id="signInFailHander" class="kr.co.hanamicron.bwp.core.security.handler.SignInFailHander"/>
 </beans>

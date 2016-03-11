@@ -1,24 +1,19 @@
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-  <definition name="memberTemplate" template="/WEB-INF/views/temlates/layout_member.jsp">
-    <put-attribute name="title" value="" />
-    <put-attribute name="core_resources" value="/WEB-INF/views/templates/core_resources.jsp"/>
-    <put-attribute name="theme_js" value="" />
-    <put-attribute name="top_header" value="/WEB-INF/views/templates/top_header.jsp" />
-    <put-attribute name="page_content" value="" />
-  </definition>
-  
   <definition name="baseTemplate" template="/WEB-INF/views/templates/layout.jsp">
     <put-attribute name="title" value="" />
     <put-attribute name="core_resources" value="/WEB-INF/views/templates/core_resources.jsp"/>
-    <put-attribute name="theme_js" value="" />
+    <put-attribute name="theme_js" value="" cascade="false"/>
     <put-attribute name="top_header" value="/WEB-INF/views/templates/top_header.jsp" />
     <put-attribute name="left_menu" value="/menu" />
     <put-attribute name="page_header" value="/WEB-INF/views/templates/page_header.jsp"/>
     <!-- <put-attribute name="footer" value="/WEB-INF/views/templates/footer.jsp" /> -->
   </definition>
 
+  <definition name="*.tiles" extends="baseTemplate">
+    <put-attribute name="page_content" value="/WEB-INF/views/templates/{1}.jsp"/>
+  </definition>
   <definition name="*/*.tiles" extends="baseTemplate">
     <put-attribute name="theme_js" value="/WEB-INF/views/{1}/theme_js.jsp"/>
     <put-attribute name="page_content" value="/WEB-INF/views/{1}/{2}.jsp"/>

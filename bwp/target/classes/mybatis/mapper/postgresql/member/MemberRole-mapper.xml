@@ -1,22 +1,23 @@
 <!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
   'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
 
-<mapper namespace="kr.co.hanamicron.bwp.components.dao.MemberDao">
+<mapper namespace="kr.co.hanamicron.bwp.component.dao.role.MemberRoleDao">
   <select id="getMemberRolesByMemberNo" parameterType="int" resultType="Role">
     select
       role.no
     , role.name
-    from bwp.member_role inner join bwp.role
-    where member_role.user_no = #{member_no}
+    from bwp.member_role
+    inner join bwp.role on role.no = member_role.role_no
+    where member_no = #{member_no}
   </select>
   
   <insert id="insertMemberRole" parameterType="memberRole">
     insert into bwp.member_role (
       member_no
     , role_no
-    ) value (
+    ) values (
       #{member.no}
-      #{role.no}
+    , #{role.no}
     )
   </insert>
 </mapper>

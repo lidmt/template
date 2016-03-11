@@ -12,7 +12,7 @@
   <mvc:default-servlet-handler />
   
   <mvc:view-controller path="/" view-name="member/signin"/>
-  
+  <mvc:resources mapping="/favicon.ico" location="/favicon.ico"/>
   <mvc:resources location="/resources/**" mapping="/resources/"/>
   <mvc:resources location="/css/**" mapping="/css/"/>
   <mvc:resources location="/js/**" mapping="/js/"/>

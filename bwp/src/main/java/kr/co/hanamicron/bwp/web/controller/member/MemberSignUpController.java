@@ -22,7 +22,7 @@ public class MemberSignUpController {
 	@RequestMapping(value="/member/signup", method=RequestMethod.PUT)
 	public String signUpMember(@ModelAttribute("member")Member member) {
 		if(memberSignUpService.signUp(member)) {
-			return "redirect:member/signup/success";
+			return "dashboard/dashboard.tiles";
 		}
 		return "member/signup_fail";
 	}

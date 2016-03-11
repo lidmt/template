@@ -2,7 +2,7 @@ package kr.co.hanamicron.bwp.component.service.member;
 
 import kr.co.hanamicron.bwp.component.dao.member.MemberDao;
 import kr.co.hanamicron.bwp.component.dao.member.SignInHistoryDao;
-import kr.co.hanamicron.bwp.component.dao.role.RoleDao;
+import kr.co.hanamicron.bwp.component.dao.role.MemberRoleDao;
 import kr.co.hanamicron.bwp.component.dao.status.MemberStatusDao;
 import kr.co.hanamicron.bwp.dto.member.Member;
 import kr.co.hanamicron.bwp.exception.member.InvalidAccessException;
@@ -18,14 +18,14 @@ public class MemberSignInServiceImpl implements MemberSignInService {
 	@Autowired MemberDao memberDao;
 	@Autowired SignInHistoryDao signInHistoryDao;
 	@Autowired MemberStatusDao memberStatusDao;
-	@Autowired RoleDao roleDao;
+	@Autowired MemberRoleDao memberRoleDao;
 	@Autowired PasswordEncoder passwordEncoder;
 
 	@Transactional(readOnly = true)
 	@Override
 	public Member signIn(String id, String password) {
 		Member member = memberDao.getMemberById(id);
-
+		System.out.println("------------------------------- kekt ==================================");
 		if (member == null) {
 			throw new MemberNotFoundException("존재하지 않는 아이디입니다.");
 		} else if (!matchPassword(password, member.getPassword())) {
@@ -34,7 +34,7 @@ public class MemberSignInServiceImpl implements MemberSignInService {
 
 		member.setHistory(signInHistoryDao.getSignInHistoryByMemberNo(member.getNo()));
 		member.setStatus(memberStatusDao.getMemberStatusByMemberNo(member.getNo()));
-		member.setRoles(roleDao.getRolesByMemeberNo(member.getNo()));
+		member.setRoles(memberRoleDao.getMemberRolesByMemberNo(member.getNo()));
 		return member;
 	}
 

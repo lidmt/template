@@ -1,0 +1,20 @@
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<mapper namespace="kr.co.hanamicron.bwp.component.dao.menu.AccessMenuDao">
+  <select id="getAccessMenuListByMemberNo" parameterType="int" resultType="menu">
+   select
+      menu.no
+    , menu.url
+    , menu.name
+    , menu.depth
+    , menu.sequence
+    , menu.parents_no
+    from bwp.access_menu
+    inner join bwp.menu on menu.no = access_menu.menu_no
+    where access_menu.role_no in (
+      select role_no from bwp.member_role
+      where member_no = #{member_no}
+    )
+    order by depth asc, sequence asc
+  </select>
+</mapper>

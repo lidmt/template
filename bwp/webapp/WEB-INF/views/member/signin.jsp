@@ -68,7 +68,7 @@
 				<div class="content">
 
 					<!-- Advanced login -->
-					<form:form commandName="member" action="/member/signin" method="post" class="form-validate">
+					<form:form action="/member/signin" method="post" class="form-validate">
 						<div class="panel panel-body login-form">
 							<div class="text-center">
 								<div class="icon-object border-slate-300 text-slate-300"><i class="icon-reading"></i></div>
@@ -76,14 +76,14 @@
 							</div>
 
 							<div class="form-group has-feedback has-feedback-left">
-								<form:input type="text" class="form-control" placeholder="ID" path="id" required="required"/>
+								<input type="text" class="form-control" placeholder="아이디" name="id" required="required"/>
 								<div class="form-control-feedback">
 									<i class="icon-user text-muted"></i>
 								</div>
 							</div>
 
 							<div class="form-group has-feedback has-feedback-left">
-								<form:input type="text" class="form-control" placeholder="Password" path="password" requierd="required"/>
+								<input type="password" class="form-control" placeholder="비밀번호" name="password" requierd="required"/>
 								<div class="form-control-feedback">
 									<i class="icon-lock2 text-muted"></i>
 								</div>
@@ -105,11 +105,11 @@
 							</div>
 
 							<div class="form-group">
-								<button type="submit" class="btn bg-blue btn-block">Login <i class="icon-arrow-right14 position-right"></i></button>
+								<button type="submit" class="btn bg-blue btn-block">로그인<i class="icon-arrow-right14 position-right"></i></button>
 							</div>
 
-							<div class="content-divider text-muted form-group"><span>Don't have an account?</span></div>
-							<a href="/member/signup" class="btn btn-default btn-block content-group">Sign up</a>
+							<div class="content-divider text-muted form-group"><span>계정이 없으신가요?</span></div>
+							<a href="/member/signup" class="btn btn-default btn-block content-group">회원가입</a>
 							<span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a href="#">Terms &amp; Conditions</a> and <a href="#">Cookie Policy</a></span>
 						</div>
 					</form:form>
@@ -133,6 +133,5 @@
 
 	</div>
 	<!-- /page container -->
-
 </body>
 </html>

@@ -4,7 +4,7 @@
 
 <mapper namespace="kr.co.hanamicron.bwp.component.dao.member.MemberDao">
   <select id="getMemberById" parameterType="String" resultType="Member">
-    Member
+    select
       no
     , id
     , password
@@ -14,7 +14,7 @@
   </select>
   
   <insert id="insertMember" parameterType="Member">
-    <selectKey keyProperty="no" order="BEFORE">
+    <selectKey keyProperty="no" order="BEFORE" resultType="int">
       select nextVal('bwp.member_no_seq')
     </selectKey>
     Insert into bwp.member (
@@ -24,7 +24,7 @@
     , name
     , email
     , update_date
-    ) value (
+    ) values (
       #{no}
     , #{id}
     , #{password}

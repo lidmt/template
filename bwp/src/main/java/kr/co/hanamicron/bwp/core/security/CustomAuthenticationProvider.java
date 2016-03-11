@@ -27,8 +27,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider{
 	}
 
 	@Override
-	public boolean supports(Class<?> clazz) {
-		return false;
+	public boolean supports(Class<?> authentication) {
+		return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
 	private List<GrantedAuthority> getGrantedAuthorities(Member member) {
